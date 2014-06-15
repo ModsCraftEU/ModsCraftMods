@@ -7,7 +7,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 public class Items {
 	
 	public static Item testItem;
-	
+	public static Item itemWindmill;
 	public static CreativeTabs modscraftTab=new CreativeTabs("modscraftTab"){
 		public Item getTabIconItem(){
 			return net.minecraft.init.Items.emerald;
@@ -25,7 +25,10 @@ public class Items {
 		 * where unlocalized_testItem_name is also the unlocalized name!
 		 */
 		testItem=new Item().setUnlocalizedName(ItemInfo.testItemUnlocalizedName).setCreativeTab(modscraftTab).setTextureName(eu.modscraft.mods.ModsCraft_ModInformation.ID+ ":" + ItemInfo.testItemTexture);
-		GameRegistry.registerItem(testItem, "testItem");
+		itemWindmill=new ItemWindmill().setUnlocalizedName(ItemInfo.windmillUnlocalizedName).setCreativeTab(modscraftTab).setTextureName("diamond");
+		
+		GameRegistry.registerItem(testItem, ItemInfo.testItemUnlocalizedName);
+		GameRegistry.registerItem(itemWindmill, ItemInfo.windmillUnlocalizedName);
 	}	
 	
 	public static void addNames()

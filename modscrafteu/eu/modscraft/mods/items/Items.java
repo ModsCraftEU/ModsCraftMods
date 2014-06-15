@@ -16,19 +16,21 @@ public class Items {
 	
 	public static void init()
 	{
-		//item = new item(blah)
+		/*
+		 * Language Files:
+		 * Name Blocks:
+		 * tile.blockRed.name=Red Block
+		 * where blockRed is the unlocalized name
+		 * item.unlocalized_testItem_name.name=ModsCraft Test Item
+		 * where unlocalized_testItem_name is also the unlocalized name!
+		 */
 		testItem=new Item().setUnlocalizedName(ItemInfo.testItemUnlocalizedName).setCreativeTab(modscraftTab).setTextureName(eu.modscraft.mods.ModsCraft_ModInformation.ID+ ":" + ItemInfo.testItemTexture);
 		GameRegistry.registerItem(testItem, "testItem");
 	}	
 	
 	public static void addNames()
 	{
-		/*
-		for(int i=0;i<ItemInfo.cardNames.length;i++)
-		{
-			LanguageRegistry.addName(new ItemStack(card,1,i), ItemInfo.cardNames[i]);
-		}
-		 */
+		
 	}
 	public static void registerRecipes()
 	{

@@ -1,2 +1,6 @@
 itemGroup.modscraftTab=ModsCraft.eu Stuff
 item.unlocalized_testItem_name.name=ModsCraft Test Item
+achievement.smoothstone=I became smooth
+achievement.bonemeal=Now whats this?
+achievement.smoothstone.desc=This is a pretty useless Achievement.
+achievement.bonemeal.desc=Who the hell though about this devilish thing here?

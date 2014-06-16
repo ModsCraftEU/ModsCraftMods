@@ -33,7 +33,6 @@ public class ModsCraftMods {
     public void preInit(FMLPreInitializationEvent event)
     {
 		ConfigHandler.init(event.getSuggestedConfigurationFile());
-		//modscraft_mods.items.Items.init
 		Items.init();
 		Blocks.preInit();
 		Achievements.init();

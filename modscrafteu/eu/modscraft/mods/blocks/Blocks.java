@@ -19,5 +19,6 @@ public class Blocks {
 	}
 	public static void init(){
 		GameRegistry.registerTileEntity(TileEntityWindmill.class, "windmill");
+		GameRegistry.registerTileEntity(TileEntityWindmillFloor.class, "windmillFloor");
 	}
 }

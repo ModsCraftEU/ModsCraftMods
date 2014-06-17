@@ -12,7 +12,7 @@ public class BlockWindmillGround extends BlockContainer{
 		super(material);
 		// TODO Auto-generated constructor stub
 		//To set this as slab
-		this.setBlockBounds(0,0,0,1,0.3f,1);
+		this.setBlockBounds(0,0,0,1,(1F/16F)*14F,1);
 	}
 	
 	//Den schwarzen Schatten in der mitte entfernen! Dafür diese beiden folgenden.

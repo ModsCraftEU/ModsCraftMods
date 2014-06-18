@@ -18,6 +18,8 @@ public class ExtendedPlayer implements IExtendedEntityProperties{
 	
 	private int maxMana;
 	private int currentMana;
+	private int currentThirstTick;
+	private final static int thirstActionTick=500;
 	
 	//used to easier initialize variables, also aesthetic
 	public ExtendedPlayer(EntityPlayer player)
@@ -26,11 +28,28 @@ public class ExtendedPlayer implements IExtendedEntityProperties{
 		this.player=player;
 		this.maxMana=100;
 		this.currentMana=100;
+		this.currentThirstTick=0;
 	}
 	//Register Method - also only to make the registering easier and the code looking better
 	public static final void register(EntityPlayer player)
 	{
 		player.registerExtendedProperties(ExtendedPlayer.extPropName,new ExtendedPlayer(player));
+	}
+	public void handleReceivedThirstUpdate(int newThirstAmount, boolean direction)
+	{
+		//TODO: Add the actual Code.. without the client wont even see on the GUI (which at the point of this writing isnt created)
+		//the thirst update!
+	}
+	public void doThirstOperation()
+	{
+		//Here we want to make our thirst stuff
+		//This variables need more randomisation and of course some tweaking :)
+		this.currentThirstTick++;
+		if(currentThirstTick>=this.thirstActionTick)
+		{
+			//System.out.println("Thirst Tick 100!");
+			this.currentThirstTick=0;
+		}
 	}
 	//To make the code look nicer
 	public static final ExtendedPlayer get(EntityPlayer player)

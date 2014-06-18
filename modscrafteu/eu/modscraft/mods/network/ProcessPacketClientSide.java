@@ -40,6 +40,14 @@ public class ProcessPacketClientSide {
 				props.setCurrentMana(newManaAmount);
 				break;
 			}
+			case ModsCraftMods.PACKET_TYPE_UPDATE_THIRST:
+			{
+				System.out.println("Thirst Update Packet Received!");
+				int newThirstAmount=bbis.readInt();
+				boolean updateDirection=bbis.readBoolean();	//This is false for a decreasing effect and true for increasing
+				ExtendedPlayer props=ExtendedPlayer.get(Minecraft.getMinecraft().thePlayer);
+				props.handleReceivedThirstUpdate(newThirstAmount, updateDirection)
+			}
 		}
 		bbis.close();
 	}

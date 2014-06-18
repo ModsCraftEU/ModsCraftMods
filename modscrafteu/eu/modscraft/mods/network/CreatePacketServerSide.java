@@ -40,6 +40,22 @@ public class CreatePacketServerSide {
 		bbos.close();
 		return packet;
 	}
+	public static FMLProxyPacket createThirstTickPacket(int thirstAmount, boolean refreshOrConsume) throws IOException
+	{
+		/*
+		 * thirstAmount is the Amount of thirst, like hunger from 0 to 20. 0 will kill the player though.
+		 * refreshOrConsume means if the player just refreshed his thirst or if its a tick which used thirst,
+		 * in which case its false. There is no use for that now but maby later?
+		 */
+		System.out.println("MODSCRAFT: Creating Thirst-Packet");
+		ByteBufOutputStream bbos=new ByteBufOutputStream(Unpooled.buffer());
+		bbos.writeInt(ModsCraftMods.PACKET_TYPE_UPDATE_THIRST);
+		bbos.writeInt(thirstAmount);
+		bbos.writeBoolean(refreshOrConsume);
+		FMLProxyPacket packet=new FMLProxyPacket(bbos.buffer(),ModsCraftMods.networkChannelName);
+		bbos.close();
+		return packet;
+	}
 	public static void sendToAll(FMLProxyPacket parPacket)
 	{
 		ModsCraftMods.channel.sendToAll(parPacket);
@@ -62,6 +78,14 @@ public class CreatePacketServerSide {
 			ModsCraftMods.channel.sendTo(createManaPacket(manaAmount), player);
 		}catch (IOException e)
 		{
+			e.printStackTrace();
+		}
+	}
+	public static void sendThirstUpdate(int thirstAmount, boolean refreshOrConsume, EntityPlayerMP player)
+	{
+		try{
+			ModsCraftMods.channel.sendTo(createThirstTickPacket(thirstAmount,refreshOrConsume), player);
+		}catch(IOException e){
 			e.printStackTrace();
 		}
 	}

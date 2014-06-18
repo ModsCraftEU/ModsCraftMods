@@ -1,15 +1,22 @@
 package eu.modscraft.mods.events;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.world.World;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import eu.modscraft.mods.ExtendedPlayer;
 
 public class ModsCraftThirstEvent {
 	@SubscribeEvent
 	public void onLivingUpdateEvent(LivingUpdateEvent event)
 	{
-		
+		if(event.entity instanceof EntityPlayer)
+		{
+			ExtendedPlayer props=ExtendedPlayer.get(Minecraft.getMinecraft().thePlayer);
+			props.doThirstOperation();
+		}
 	}
 	@SubscribeEvent
 	public void onPlayerHurt(LivingHurtEvent event)

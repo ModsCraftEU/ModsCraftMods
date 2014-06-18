@@ -42,6 +42,7 @@ public class ModsCraftMods {
 	public final static int PACKET_TYPE_ENTITY_SYNC=1;
 	public final static int PACKET_TYPE_C2S_TEST = 1;
 	public final static int PACKET_TYPE_UPDATE_MANA=2;
+	public final static int PACKET_TYPE_UPDATE_THIRST=3;
 	@EventHandler
     public void preInit(FMLPreInitializationEvent event)
     {

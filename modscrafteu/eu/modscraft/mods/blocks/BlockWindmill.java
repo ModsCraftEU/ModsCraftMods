@@ -1,5 +1,6 @@
 package eu.modscraft.mods.blocks;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.tileentity.TileEntity;
@@ -27,8 +28,17 @@ public class BlockWindmill extends BlockContainer{
 	}
 	//@Override
 	public TileEntity createNewTileEntity(World var1, int var2) {
-		// TODO Auto-generated method stub
 		return new TileEntityWindmill();
+	}
+	
+	@Override
+	public void breakBlock(World world,int x,int y,int z, Block block, int metadata){
+		if(world.getBlock(x,y+1,z).equals(Blocks.blockWindmill)){
+			world.setBlockToAir(x, y+1, z);
+		}
+		if(world.getBlock(x,y-1,z).equals(Blocks.blockWindmill)){
+			world.setBlockToAir(x, y-1, z);
+		}
 	}
 
 }

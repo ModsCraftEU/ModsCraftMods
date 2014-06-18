@@ -8,6 +8,8 @@ public class Items {
 	
 	public static Item testItem;
 	public static Item itemWindmill;
+	public static Item itemMana;
+	
 	public static CreativeTabs modscraftTab=new CreativeTabs("modscraftTab"){
 		public Item getTabIconItem(){
 			return net.minecraft.init.Items.emerald;
@@ -26,7 +28,9 @@ public class Items {
 		 */
 		testItem=new Item().setUnlocalizedName(ItemInfo.testItemUnlocalizedName).setCreativeTab(modscraftTab).setTextureName(eu.modscraft.mods.ModsCraft_ModInformation.ID+ ":" + ItemInfo.testItemTexture);
 		itemWindmill=new ItemWindmill().setUnlocalizedName(ItemInfo.windmillUnlocalizedName).setCreativeTab(modscraftTab).setTextureName("diamond");
+		itemMana=new ItemUseMana().setUnlocalizedName("item_mana").setCreativeTab(modscraftTab).setTextureName("fire");
 		
+		GameRegistry.registerItem(itemMana, "item_mana");
 		GameRegistry.registerItem(testItem, ItemInfo.testItemUnlocalizedName);
 		GameRegistry.registerItem(itemWindmill, ItemInfo.windmillUnlocalizedName);
 	}	

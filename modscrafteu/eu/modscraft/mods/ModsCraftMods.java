@@ -9,14 +9,19 @@ import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
-import cpw.mods.fml.common.registry.GameRegistry;
+import cpw.mods.fml.common.network.FMLEventChannel;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import eu.modscraft.achievements.Achievements;
 import eu.modscraft.mods.blocks.Blocks;
 import eu.modscraft.mods.config.ConfigHandler;
 import eu.modscraft.mods.events.ModsCraftBonemealEvent;
 import eu.modscraft.mods.events.ModsCraftFillBucketEvent;
 import eu.modscraft.mods.events.ModsCraftItemSmeltedEvent;
+import eu.modscraft.mods.events.ModsCraftThirstEvent;
+import eu.modscraft.mods.events.testingEventHandler;
 import eu.modscraft.mods.items.Items;
+import eu.modscraft.mods.proxy.ClientProxy;
 import eu.modscraft.mods.proxy.CommonProxy;
 
 @Mod(modid = ModsCraft_ModInformation.ID, name = ModsCraft_ModInformation.name, version = ModsCraft_ModInformation.version)
@@ -29,6 +34,14 @@ public class ModsCraftMods {
 	@SidedProxy(clientSide="eu.modscraft.mods.proxy.ClientProxy",serverSide="eu.modscraft.mods.proxy.CommonProxy")
 	public static CommonProxy proxy;
 	
+	
+	//Used for Packet Stuff
+	public static final String networkChannelName="ModsCraftMods";
+	public static FMLEventChannel channel;
+	//Packet Type enumeration
+	public final static int PACKET_TYPE_ENTITY_SYNC=1;
+	public final static int PACKET_TYPE_C2S_TEST = 1;
+	public final static int PACKET_TYPE_UPDATE_MANA=2;
 	@EventHandler
     public void preInit(FMLPreInitializationEvent event)
     {
@@ -43,13 +56,20 @@ public class ModsCraftMods {
     	Items.addNames();
     	Items.registerRecipes();
     	Achievements.load();
-    	//No clue why 2 different buses have to be used..its just like that and i dont know why
+    	
+    	//String channel = null;
+    	//EnumMap<Side, FMLEmbeddedChannel> channels = NetworkRegistry.INSTANCE.newChannel(channel, new ChannelHandler());
+    	proxy.init();
+
     	MinecraftForge.EVENT_BUS.register(new ModsCraftBonemealEvent());
     	MinecraftForge.EVENT_BUS.register(new ModsCraftFillBucketEvent());
+    	MinecraftForge.EVENT_BUS.register(new ModsCraftThirstEvent());
+    	MinecraftForge.EVENT_BUS.register(new testingEventHandler());
     	FMLCommonHandler.instance().bus().register(new ModsCraftItemSmeltedEvent());
     	
     	Blocks.init();
     	proxy.registerProxies();
+    	proxy.registerRenderers();
     }
     @EventHandler
     public void modsLoaded(FMLPostInitializationEvent event)

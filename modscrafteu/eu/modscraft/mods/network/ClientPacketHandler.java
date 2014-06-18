@@ -14,7 +14,7 @@ public class ClientPacketHandler extends ServerPacketHandler{
 		if(channelName.equals(ModsCraftMods.networkChannelName))
 		{
 			//Our Packet.
-			System.out.println("MODSCRAFT: Client received Server packet");
+			if(eu.modscraft.mods.ModsCraft_ModInformation.doDebugOutput)System.out.println("MODSCRAFT: Client received Server packet");
 			ProcessPacketClientSide.processPacketOnClient(event.packet.payload(),event.packet.getTarget());
 		}
 	}

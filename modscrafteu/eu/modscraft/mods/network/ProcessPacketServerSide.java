@@ -17,17 +17,17 @@ public class ProcessPacketServerSide {
 	{
 		if(parSide==Side.SERVER) //We want this to only be handled on the server, right?
 		{
-			System.out.println("MODSCRAFT: Received Packet on Server Side from Player = "+parPlayer.getEntityId());
+			if(eu.modscraft.mods.ModsCraft_ModInformation.doDebugOutput)System.out.println("MODSCRAFT: Received Packet on Server Side from Player = "+parPlayer.getEntityId());
 			ByteBufInputStream bbis=new ByteBufInputStream(parBB);
 			int packetTypeID=bbis.readInt();
-			System.out.println("Paccket Type ID="+packetTypeID);
+			if(eu.modscraft.mods.ModsCraft_ModInformation.doDebugOutput)System.out.println("Paccket Type ID="+packetTypeID);
 			switch(packetTypeID)
 			{
 				case ModsCraftMods.PACKET_TYPE_C2S_TEST:
 				{
-					System.out.println("Test packet received");
+					if(eu.modscraft.mods.ModsCraft_ModInformation.doDebugOutput)System.out.println("Test packet received");
 					int testVal=bbis.readInt();
-					System.out.println("Test payload value="+testVal);
+					if(eu.modscraft.mods.ModsCraft_ModInformation.doDebugOutput)System.out.println("Test payload value="+testVal);
 					break;
 				}
 				

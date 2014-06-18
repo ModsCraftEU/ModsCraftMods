@@ -20,7 +20,7 @@ public class ItemUseMana extends Item{
 				world.setBlock((int)player.posX+1, (int)player.posY, (int)player.posZ+1,Blocks.fire);
 			}else{
 				//Player didnt have enough Mana, so we replenish it
-				System.out.println("Player is out of Mana!");
+				if(eu.modscraft.mods.ModsCraft_ModInformation.doDebugOutput)System.out.println("Player is out of Mana!");
 				props.replenishMana();
 			}
 		}

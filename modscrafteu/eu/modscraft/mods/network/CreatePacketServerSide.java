@@ -16,7 +16,7 @@ public class CreatePacketServerSide {
 	public CreatePacketServerSide(){}
 	public static FMLProxyPacket createEntityPacket(Entity parEntity) throws IOException
 	{
-		System.out.println("MODSCRAFT: Sending Entity Sync Packet on ServerSide");
+		if(eu.modscraft.mods.ModsCraft_ModInformation.doDebugOutput)System.out.println("MODSCRAFT: Sending Entity Sync Packet on ServerSide");
 		ByteBufOutputStream bbos=new ByteBufOutputStream(Unpooled.buffer());
 		
 		//Creating payload:
@@ -33,7 +33,7 @@ public class CreatePacketServerSide {
 	}
 	public static FMLProxyPacket createManaPacket(int manaAmount) throws IOException
 	{
-		System.out.println("MODSCRAFT: Creating Mana-Packet");
+		if(eu.modscraft.mods.ModsCraft_ModInformation.doDebugOutput)System.out.println("MODSCRAFT: Creating Mana-Packet");
 		ByteBufOutputStream bbos=new ByteBufOutputStream(Unpooled.buffer());
 		bbos.writeInt(ModsCraftMods.PACKET_TYPE_UPDATE_MANA);
 		bbos.writeInt(manaAmount);
@@ -48,7 +48,7 @@ public class CreatePacketServerSide {
 		 * refreshOrConsume means if the player just refreshed his thirst or if its a tick which used thirst,
 		 * in which case its false. There is no use for that now but maby later?
 		 */
-		System.out.println("MODSCRAFT: Creating Thirst-Packet");
+		if(eu.modscraft.mods.ModsCraft_ModInformation.doDebugOutput)System.out.println("MODSCRAFT: Creating Thirst-Packet");
 		ByteBufOutputStream bbos=new ByteBufOutputStream(Unpooled.buffer());
 		bbos.writeInt(ModsCraftMods.PACKET_TYPE_UPDATE_THIRST);
 		bbos.writeInt(thirstAmount);

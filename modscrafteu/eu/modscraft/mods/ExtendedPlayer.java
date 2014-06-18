@@ -22,7 +22,7 @@ public class ExtendedPlayer implements IExtendedEntityProperties{
 	private int currentMana;
 	private int currentThirstTick;
 	private int currentThirst;
-	private final static int thirstActionTick=1500;
+	private final static int thirstActionTick=5000;
 	
 	//used to easier initialize variables, also aesthetic
 	public ExtendedPlayer(EntityPlayer player)
@@ -38,6 +38,12 @@ public class ExtendedPlayer implements IExtendedEntityProperties{
 	public static final void register(EntityPlayer player)
 	{
 		player.registerExtendedProperties(ExtendedPlayer.extPropName,new ExtendedPlayer(player));
+	}
+	public void replenishThirst(int amount,Entity entity)
+	{
+		if(this.currentThirst+amount<=20)this.currentThirst+=amount;
+		else this.currentThirst=20;
+		sendThirstUpdate(this.currentThirst,true,entity);
 	}
 	public void handleReceivedThirstUpdate(int newThirstAmount, boolean direction)
 	{
@@ -63,7 +69,7 @@ public class ExtendedPlayer implements IExtendedEntityProperties{
 				{
 					//We have some thirst we can do stuff to
 					this.currentThirst--;
-					System.out.println("MODSCRAFT: New Thirst: "+this.currentThirst);
+					if(eu.modscraft.mods.ModsCraft_ModInformation.doDebugOutput)System.out.println("MODSCRAFT: New Thirst: "+this.currentThirst);
 					sendThirstUpdate(currentThirst,false, entity);
 				}else{
 					//We are out of thirst. Theoretically we should die now! I will set the hunger to zero for our test.

@@ -69,6 +69,9 @@ public class GuiThirstBar extends Gui{
 		int manaBarWidth=(int)(((float)props.getCurrentMana()/props.getMaxMana())*49);
 		this.drawTexturedModalRect(xPos, yPos+1, 0, 4, manaBarWidth, 2);
 		 */
+		
+		//TODO: There's some problematics with switching to maximized and small window mode, causing the positions of our graphics to be incorrect.
+		//We need to use relative screen coordinates instead of absolute ones.
 		if(!this.mc.isFullScreen())
 		{
 			this.drawTexturedModalRect(renderPositionX, renderPositionY, 0, 0, 99, 9);

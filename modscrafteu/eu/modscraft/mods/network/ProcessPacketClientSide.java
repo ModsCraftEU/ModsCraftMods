@@ -20,7 +20,7 @@ public class ProcessPacketClientSide {
 	@SideOnly(Side.CLIENT)
 	public static void processPacketOnClient(ByteBuf parBB, Side parSide) throws IOException
 	{
-		System.out.println("Received ProcessPacketClientSide on Client Side");
+		if(eu.modscraft.mods.ModsCraft_ModInformation.doDebugOutput)System.out.println("Received ProcessPacketClientSide on Client Side");
 		World world=Minecraft.getMinecraft().theWorld;
 		ByteBufInputStream bbis=new ByteBufInputStream(parBB);
 		int packetTypeID=bbis.readInt();
@@ -29,12 +29,12 @@ public class ProcessPacketClientSide {
 			case ModsCraftMods.PACKET_TYPE_ENTITY_SYNC:
 			{
 				boolean isAnimal=bbis.readBoolean();
-				System.out.println("Entity is animal: "+isAnimal);
+				if(eu.modscraft.mods.ModsCraft_ModInformation.doDebugOutput)System.out.println("Entity is animal: "+isAnimal);
 				break;
 			}
 			case ModsCraftMods.PACKET_TYPE_UPDATE_MANA:
 			{
-				System.out.println("Mana Update Packet Received!");
+				if(eu.modscraft.mods.ModsCraft_ModInformation.doDebugOutput)System.out.println("Mana Update Packet Received!");
 				int newManaAmount=bbis.readInt();
 				ExtendedPlayer props=ExtendedPlayer.get(Minecraft.getMinecraft().thePlayer);
 				props.setCurrentMana(newManaAmount);
@@ -42,7 +42,7 @@ public class ProcessPacketClientSide {
 			}
 			case ModsCraftMods.PACKET_TYPE_UPDATE_THIRST:
 			{
-				System.out.println("Thirst Update Packet Received!");
+				if(eu.modscraft.mods.ModsCraft_ModInformation.doDebugOutput)System.out.println("Thirst Update Packet Received!");
 				int newThirstAmount=bbis.readInt();
 				boolean updateDirection=bbis.readBoolean();	//This is false for a decreasing effect and true for increasing
 				ExtendedPlayer props=ExtendedPlayer.get(Minecraft.getMinecraft().thePlayer);

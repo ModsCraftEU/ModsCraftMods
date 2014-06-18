@@ -22,7 +22,7 @@ public class ServerPacketHandler {
 		if(channelName.equals(ModsCraftMods.networkChannelName))
 		{
 			//Our Channel, probably our Packet!
-			System.out.println("MODSCRAFT: Received packet from player = "+player.getEntityId());
+			if(eu.modscraft.mods.ModsCraft_ModInformation.doDebugOutput)System.out.println("MODSCRAFT: Received packet from player = "+player.getEntityId());
 			ProcessPacketServerSide.processPacketOnServer(event.packet.payload(),event.packet.getTarget(),player);
 		}
 	}

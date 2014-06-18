@@ -7,6 +7,7 @@ import java.io.IOException;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.passive.EntityAnimal;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import cpw.mods.fml.common.network.internal.FMLProxyPacket;
 import eu.modscraft.mods.ModsCraftMods;
@@ -81,12 +82,16 @@ public class CreatePacketServerSide {
 			e.printStackTrace();
 		}
 	}
-	public static void sendThirstUpdate(int thirstAmount, boolean refreshOrConsume, EntityPlayerMP player)
+	public static void sendThirstUpdate(int thirstAmount, boolean refreshOrConsume, Entity entity)
 	{
-		try{
-			ModsCraftMods.channel.sendTo(createThirstTickPacket(thirstAmount,refreshOrConsume), player);
-		}catch(IOException e){
-			e.printStackTrace();
+		if(entity instanceof EntityPlayerMP)
+		{
+			try{
+				
+				ModsCraftMods.channel.sendTo(createThirstTickPacket(thirstAmount,refreshOrConsume), (EntityPlayerMP)entity);
+			}catch(IOException e){
+				e.printStackTrace();
+			}
 		}
 	}
 }

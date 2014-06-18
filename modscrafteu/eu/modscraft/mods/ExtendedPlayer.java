@@ -4,6 +4,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IExtendedEntityProperties;
 import eu.modscraft.mods.network.CreatePacketServerSide;
@@ -14,12 +15,14 @@ public class ExtendedPlayer implements IExtendedEntityProperties{
 	public final static String extPropName="ExtendedPlayer";
 	public final static String fieldName_currentMana="CurrentMana";
 	public final static String fieldName_maxMana="MaxMana";
+	public final static String fieldName_thirst="CurrentThirst";
 	public static final int MANA_WATCHER=20;
 	
 	private int maxMana;
 	private int currentMana;
 	private int currentThirstTick;
-	private final static int thirstActionTick=500;
+	private int currentThirst;
+	private final static int thirstActionTick=1500;
 	
 	//used to easier initialize variables, also aesthetic
 	public ExtendedPlayer(EntityPlayer player)
@@ -28,6 +31,7 @@ public class ExtendedPlayer implements IExtendedEntityProperties{
 		this.player=player;
 		this.maxMana=100;
 		this.currentMana=100;
+		this.currentThirst=20;
 		this.currentThirstTick=0;
 	}
 	//Register Method - also only to make the registering easier and the code looking better
@@ -39,16 +43,42 @@ public class ExtendedPlayer implements IExtendedEntityProperties{
 	{
 		//TODO: Add the actual Code.. without the client wont even see on the GUI (which at the point of this writing isnt created)
 		//the thirst update!
+		
 	}
-	public void doThirstOperation()
+	public int getThirst()
+	{
+		return currentThirst;
+	}
+	public void doThirstOperation(Entity entity)
 	{
 		//Here we want to make our thirst stuff
 		//This variables need more randomisation and of course some tweaking :)
-		this.currentThirstTick++;
-		if(currentThirstTick>=this.thirstActionTick)
+		if(entity instanceof EntityPlayerMP)
 		{
-			//System.out.println("Thirst Tick 100!");
-			this.currentThirstTick=0;
+			this.currentThirstTick++;
+			if(currentThirstTick>=this.thirstActionTick)
+			{
+				//System.out.println("Thirst Tick 100!");
+				if(this.currentThirst>0)
+				{
+					//We have some thirst we can do stuff to
+					this.currentThirst--;
+					System.out.println("MODSCRAFT: New Thirst: "+this.currentThirst);
+					sendThirstUpdate(currentThirst,false, entity);
+				}else{
+					//We are out of thirst. Theoretically we should die now! I will set the hunger to zero for our test.
+					// par1EntityPlayer.attackEntityFrom(DamageSource.starve, 1.0F);
+					if(player.getFoodStats().getFoodLevel()>0){
+						((EntityPlayer) entity).getFoodStats().setFoodLevel(0);
+						((EntityPlayer) entity).getFoodStats().setFoodSaturationLevel(0);
+						((EntityPlayer) entity).getFoodStats().addExhaustion(20);
+					}
+					
+					entity.attackEntityFrom(DamageSource.starve, 4.0F);
+					sendThirstUpdate(currentThirst,false, entity);
+				}
+				this.currentThirstTick=0;
+			}
 		}
 	}
 	//To make the code look nicer
@@ -64,7 +94,7 @@ public class ExtendedPlayer implements IExtendedEntityProperties{
 		NBTTagCompound properties=new NBTTagCompound();
 		properties.setInteger(fieldName_currentMana, this.currentMana);
 		properties.setInteger(fieldName_maxMana, this.maxMana);
-		
+		properties.setInteger(fieldName_thirst, this.currentThirst);
 		//if we dont have a unique name we might have conflicts - the tutorial says avoiding the use of typical names like item items and co - vanilla conflicts are no good!
 		compound.setTag(extPropName,properties);
 	}
@@ -76,6 +106,7 @@ public class ExtendedPlayer implements IExtendedEntityProperties{
 		//..and then we retrieve everything again!
 		this.currentMana=properties.getInteger(fieldName_currentMana);
 		this.maxMana=properties.getInteger(fieldName_maxMana);
+		this.currentThirst=properties.getInteger(fieldName_thirst);
 		//For debugging purposes
 	}
 
@@ -100,6 +131,10 @@ public class ExtendedPlayer implements IExtendedEntityProperties{
 	public final void sendManaUpdate()
 	{
 		CreatePacketServerSide.sendManaUpdate(this.currentMana, (EntityPlayerMP)this.player);
+	}
+	public final void sendThirstUpdate(int newThirst, boolean direction, Entity entity)
+	{
+		CreatePacketServerSide.sendThirstUpdate(newThirst, direction, entity);
 	}
 	public final boolean consumeMana(int amount)
 	{

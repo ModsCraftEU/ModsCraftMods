@@ -46,7 +46,7 @@ public class ProcessPacketClientSide {
 				int newThirstAmount=bbis.readInt();
 				boolean updateDirection=bbis.readBoolean();	//This is false for a decreasing effect and true for increasing
 				ExtendedPlayer props=ExtendedPlayer.get(Minecraft.getMinecraft().thePlayer);
-				props.handleReceivedThirstUpdate(newThirstAmount, updateDirection)
+				props.handleReceivedThirstUpdate(newThirstAmount, updateDirection);
 			}
 		}
 		bbis.close();

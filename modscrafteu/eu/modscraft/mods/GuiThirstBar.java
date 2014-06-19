@@ -12,12 +12,12 @@ import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
+
 @SideOnly(Side.CLIENT)
 public class GuiThirstBar extends Gui{
 	private Minecraft mc;
 	private static final ResourceLocation texture_thirstBar=new ResourceLocation(eu.modscraft.mods.ModsCraft_ModInformation.ID,"textures/gui/thirstBar.png");
-	private static final int renderPositionX=224;
-	private static final int renderPositionY=190;
+	
 	private static final int waterBucketOffsetY=1;
 	
 	public GuiThirstBar(Minecraft mc)
@@ -28,6 +28,9 @@ public class GuiThirstBar extends Gui{
 	@SubscribeEvent(priority=EventPriority.NORMAL)
 	public void onRenderExperienceBar(RenderGameOverlayEvent event)
 	{
+		int renderPositionX = (int) Math.round(event.resolution.getScaledWidth()*0.525);
+		int renderPositionY = (int) Math.round(event.resolution.getScaledHeight()*0.79);
+		
 		if(event.isCancelable()||event.type!=ElementType.EXPERIENCE)
 		{
 			return;
@@ -69,10 +72,6 @@ public class GuiThirstBar extends Gui{
 		int manaBarWidth=(int)(((float)props.getCurrentMana()/props.getMaxMana())*49);
 		this.drawTexturedModalRect(xPos, yPos+1, 0, 4, manaBarWidth, 2);
 		 */
-		
-		//TODO: There's some problematics with switching to maximized and small window mode, causing the positions of our graphics to be incorrect.
-		//We need to use relative screen coordinates instead of absolute ones.
-		//this.mc.currentScreen.width and .height are for relative coordinates!
 		if(!this.mc.isFullScreen())
 		{
 			this.drawTexturedModalRect(renderPositionX, renderPositionY, 0, 0, 99, 9);

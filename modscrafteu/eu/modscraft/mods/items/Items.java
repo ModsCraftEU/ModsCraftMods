@@ -42,6 +42,12 @@ public class Items {
 		greenDrink=new FoodItemsWithThirstRegeneration(6,2.0F,false,"green_drink").setUnlocalizedName("green_drink");
 		waterBottle=new FoodItemsWithThirstRegeneration(2,0.5F,false,"water_bottle").setUnlocalizedName("water_bottle");
 		
+		//This is to set the regeneration amount of thirst.
+		((FoodItemsWithThirstRegeneration) coffee).setThirstReplenishAmount(5);
+		((FoodItemsWithThirstRegeneration) brownDrink).setThirstReplenishAmount(4);
+		((FoodItemsWithThirstRegeneration) greenDrink).setThirstReplenishAmount(8);
+		((FoodItemsWithThirstRegeneration) waterBottle).setThirstReplenishAmount(2);
+		
 		GameRegistry.registerItem(brownDrink, "brown_drink");
 		GameRegistry.registerItem(greenDrink, "green_drink");
 		GameRegistry.registerItem(waterBottle, "water_bottle");

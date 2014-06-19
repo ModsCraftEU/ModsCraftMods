@@ -21,14 +21,10 @@ public class ModsCraftThirstEvent {
 	@SubscribeEvent
 	public void onPlayerHurt(LivingHurtEvent event)
 	{
-		if(event.entity instanceof EntityPlayer)
+		if(event.entity instanceof EntityPlayerMP )
 		{
 			//So that only the player gets the update
 			
 		}
-	}
-	public void updatePlayerThirst(int value)
-	{
-		//Here we can add or remove thirst
 	}
 }

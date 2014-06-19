@@ -72,6 +72,7 @@ public class GuiThirstBar extends Gui{
 		
 		//TODO: There's some problematics with switching to maximized and small window mode, causing the positions of our graphics to be incorrect.
 		//We need to use relative screen coordinates instead of absolute ones.
+		//this.mc.currentScreen.width and .height are for relative coordinates!
 		if(!this.mc.isFullScreen())
 		{
 			this.drawTexturedModalRect(renderPositionX, renderPositionY, 0, 0, 99, 9);

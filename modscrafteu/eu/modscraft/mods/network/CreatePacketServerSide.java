@@ -22,7 +22,7 @@ public class CreatePacketServerSide {
 		//Creating payload:
 		bbos.writeInt(ModsCraftMods.PACKET_TYPE_ENTITY_SYNC);
 		bbos.writeInt(parEntity.getEntityId());
-		//for the simplicity of the this test i write just a bool to see if its an enimal or not
+		//for the simplicity of the this test i write just a bool to see if its an animal or not
 		if(parEntity instanceof EntityAnimal)
 		{
 			bbos.writeBoolean(true);

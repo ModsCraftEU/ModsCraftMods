@@ -1,5 +1,6 @@
 package eu.modscraft.mods;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -22,7 +23,7 @@ public class ExtendedPlayer implements IExtendedEntityProperties{
 	private int currentMana;
 	private int currentThirstTick;
 	private int currentThirst;
-	private final static int thirstActionTick=5000;
+	private final static int thirstActionTick=1000;
 	
 	//used to easier initialize variables, also aesthetic
 	public ExtendedPlayer(EntityPlayer player)
@@ -41,15 +42,20 @@ public class ExtendedPlayer implements IExtendedEntityProperties{
 	}
 	public void replenishThirst(int amount,Entity entity)
 	{
-		if(this.currentThirst+amount<=20)this.currentThirst+=amount;
-		else this.currentThirst=20;
-		sendThirstUpdate(this.currentThirst,true,entity);
+		//System.out.println("this.currentThirst="+this.currentThirst);
+		//this.currentThirst=this.currentThirst+amount;
+		//if(this.currentThirst>20)this.currentThirst=20;
+		//sendThirstUpdate(this.currentThirst,true,entity);
+		
 	}
 	public void handleReceivedThirstUpdate(int newThirstAmount, boolean direction)
 	{
 		//TODO: Add the actual Code.. without the client wont even see on the GUI (which at the point of this writing isnt created)
 		//the thirst update!
-		
+		if(direction)
+		{
+			currentThirst=newThirstAmount;
+		}
 	}
 	public int getThirst()
 	{
@@ -129,10 +135,14 @@ public class ExtendedPlayer implements IExtendedEntityProperties{
 	{
 		return this.maxMana;
 	}
+	public final void setCurrentThirst(int amount)
+	{
+		this.currentThirst=amount;
+		
+	}
 	public final void setCurrentMana(int amount)
 	{
 		this.currentMana=amount;
-		
 	}
 	public final void sendManaUpdate()
 	{

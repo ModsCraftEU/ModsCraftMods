@@ -57,6 +57,16 @@ public class CreatePacketServerSide {
 		bbos.close();
 		return packet;
 	}
+	public static FMLProxyPacket createDrinkPacket(int replenishAmount) throws IOException
+	{
+		if(eu.modscraft.mods.ModsCraft_ModInformation.doDebugOutput)System.out.println("MODSCRAFT: Creating Drink-Packet");
+		ByteBufOutputStream bbos=new ByteBufOutputStream(Unpooled.buffer());
+		bbos.writeInt(ModsCraftMods.PACKET_TYPE_DRINK);
+		bbos.writeInt(replenishAmount);
+		FMLProxyPacket packet=new FMLProxyPacket(bbos.buffer(),ModsCraftMods.networkChannelName);
+		bbos.close();
+		return packet;
+	}
 	public static void sendToAll(FMLProxyPacket parPacket)
 	{
 		ModsCraftMods.channel.sendToAll(parPacket);
@@ -89,6 +99,17 @@ public class CreatePacketServerSide {
 			try{
 				
 				ModsCraftMods.channel.sendTo(createThirstTickPacket(thirstAmount,refreshOrConsume), (EntityPlayerMP)entity);
+			}catch(IOException e){
+				e.printStackTrace();
+			}
+		}
+	}
+	public static void sendDrinkUpdate(int replenish, Entity entity)
+	{
+		if(entity instanceof EntityPlayerMP)
+		{
+			try{
+				ModsCraftMods.channel.sendTo(createDrinkPacket(replenish), (EntityPlayerMP)entity);
 			}catch(IOException e){
 				e.printStackTrace();
 			}

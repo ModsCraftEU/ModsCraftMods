@@ -10,8 +10,6 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.FMLEventChannel;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import eu.modscraft.achievements.Achievements;
 import eu.modscraft.mods.blocks.Blocks;
 import eu.modscraft.mods.config.ConfigHandler;
@@ -20,8 +18,8 @@ import eu.modscraft.mods.events.ModsCraftFillBucketEvent;
 import eu.modscraft.mods.events.ModsCraftItemSmeltedEvent;
 import eu.modscraft.mods.events.ModsCraftThirstEvent;
 import eu.modscraft.mods.events.testingEventHandler;
+import eu.modscraft.mods.fluids.FluidHandler;
 import eu.modscraft.mods.items.Items;
-import eu.modscraft.mods.proxy.ClientProxy;
 import eu.modscraft.mods.proxy.CommonProxy;
 
 @Mod(modid = ModsCraft_ModInformation.ID, name = ModsCraft_ModInformation.name, version = ModsCraft_ModInformation.version)
@@ -43,6 +41,7 @@ public class ModsCraftMods {
 	public final static int PACKET_TYPE_C2S_TEST = 1;
 	public final static int PACKET_TYPE_UPDATE_MANA=2;
 	public final static int PACKET_TYPE_UPDATE_THIRST=3;
+	public final static int PACKET_TYPE_DRINK = 4;
 	@EventHandler
     public void preInit(FMLPreInitializationEvent event)
     {
@@ -50,6 +49,7 @@ public class ModsCraftMods {
 		Items.init();
 		Blocks.preInit();
 		Achievements.init();
+		FluidHandler.preInit();
     }
 	@EventHandler
     public void load(FMLInitializationEvent event)
@@ -69,11 +69,13 @@ public class ModsCraftMods {
     	FMLCommonHandler.instance().bus().register(new ModsCraftItemSmeltedEvent());
     	
     	Blocks.init();
+    	FluidHandler.init();
     	proxy.registerProxies();
     	proxy.registerRenderers();
     }
     @EventHandler
     public void modsLoaded(FMLPostInitializationEvent event)
     {
+    	FluidHandler.postInit();
     }
 }

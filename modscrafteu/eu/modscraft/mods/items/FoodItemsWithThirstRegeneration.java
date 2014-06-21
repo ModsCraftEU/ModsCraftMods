@@ -1,6 +1,7 @@
 package eu.modscraft.mods.items;
 
 import eu.modscraft.mods.ExtendedPlayer;
+import eu.modscraft.mods.network.CreatePacketServerSide;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -52,8 +53,8 @@ public class FoodItemsWithThirstRegeneration extends ItemFood{
 			if(player instanceof EntityPlayerMP)
 			{
 				if(eu.modscraft.mods.ModsCraft_ModInformation.doDebugOutput)System.out.println("FOOD! TRHIST REPLENISH = "+thirstReplenishAmount);
-				ExtendedPlayer props=ExtendedPlayer.get(player);
-				props.replenishThirst(thirstReplenishAmount, player);
+				//CreatePacketServerSide.sendThirstUpdate(newThirst, direction, entity);
+				CreatePacketServerSide.sendDrinkUpdate(this.thirstReplenishAmount, player);
 			}
 		}
 	}

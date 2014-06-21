@@ -47,6 +47,22 @@ public class ProcessPacketClientSide {
 				boolean updateDirection=bbis.readBoolean();	//This is false for a decreasing effect and true for increasing
 				ExtendedPlayer props=ExtendedPlayer.get(Minecraft.getMinecraft().thePlayer);
 				props.handleReceivedThirstUpdate(newThirstAmount, updateDirection);
+				break;
+			}
+			case ModsCraftMods.PACKET_TYPE_DRINK:
+			{
+				ExtendedPlayer props=ExtendedPlayer.get(Minecraft.getMinecraft().thePlayer);
+				if(eu.modscraft.mods.ModsCraft_ModInformation.doDebugOutput)System.out.println("Drink Update Packet Received!");
+				int replenish=bbis.readInt();
+				System.out.println("############");
+				System.out.println("old Thirst="+props.getThirst());
+				System.out.println("replenish="+replenish);
+				int newThirstAmount=props.getThirst()+replenish;
+				System.out.println("New thirst="+newThirstAmount);
+				if(newThirstAmount>20)newThirstAmount=20;
+				props.setCurrentThirst(newThirstAmount);
+				System.out.println("############");
+				break;
 			}
 		}
 		bbis.close();

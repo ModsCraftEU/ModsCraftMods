@@ -14,7 +14,7 @@ import eu.modscraft.achievements.Achievements;
 import eu.modscraft.mods.blocks.Blocks;
 import eu.modscraft.mods.config.ConfigHandler;
 import eu.modscraft.mods.events.ModsCraftBonemealEvent;
-import eu.modscraft.mods.events.ModsCraftFillBucketEvent;
+import eu.modscraft.mods.events.ModsCraftBucketFilledEvent;
 import eu.modscraft.mods.events.ModsCraftItemSmeltedEvent;
 import eu.modscraft.mods.events.ModsCraftThirstEvent;
 import eu.modscraft.mods.events.testingEventHandler;
@@ -63,7 +63,7 @@ public class ModsCraftMods {
     	proxy.init();
 
     	MinecraftForge.EVENT_BUS.register(new ModsCraftBonemealEvent());
-    	MinecraftForge.EVENT_BUS.register(new ModsCraftFillBucketEvent());
+    	MinecraftForge.EVENT_BUS.register(new ModsCraftBucketFilledEvent());
     	MinecraftForge.EVENT_BUS.register(new ModsCraftThirstEvent());
     	MinecraftForge.EVENT_BUS.register(new testingEventHandler());
     	FMLCommonHandler.instance().bus().register(new ModsCraftItemSmeltedEvent());

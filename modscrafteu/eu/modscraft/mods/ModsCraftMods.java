@@ -10,6 +10,7 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.FMLEventChannel;
+import cpw.mods.fml.common.registry.GameRegistry;
 import eu.modscraft.achievements.Achievements;
 import eu.modscraft.mods.blocks.Blocks;
 import eu.modscraft.mods.config.ConfigHandler;
@@ -42,6 +43,9 @@ public class ModsCraftMods {
 	public final static int PACKET_TYPE_UPDATE_MANA=2;
 	public final static int PACKET_TYPE_UPDATE_THIRST=3;
 	public final static int PACKET_TYPE_DRINK = 4;
+	
+	WorldGeneratorModsCraft wGen=new WorldGeneratorModsCraft();
+	
 	@EventHandler
     public void preInit(FMLPreInitializationEvent event)
     {
@@ -72,6 +76,7 @@ public class ModsCraftMods {
     	FluidHandler.init();
     	proxy.registerProxies();
     	proxy.registerRenderers();
+    	GameRegistry.registerWorldGenerator(wGen, 0);
     }
     @EventHandler
     public void modsLoaded(FMLPostInitializationEvent event)

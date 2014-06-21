@@ -49,6 +49,7 @@ public class SaltWaterBlock extends BlockFluidClassic{
 	@Override
 	public boolean displaceIfPossible(World world, int x, int y, int z) 
 	{
+		//System.out.println("DEBUG! SALTWATER FOUND");
 		if (world.getBlock(x,  y,  z).getMaterial().isLiquid())
 		{
 			if(world.getBlock(x, y, z).equals(Blocks.water))

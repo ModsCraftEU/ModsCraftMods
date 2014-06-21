@@ -2,6 +2,7 @@ package eu.modscraft.mods.items;
 
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import cpw.mods.fml.common.registry.GameRegistry;
 
 public class Items {
@@ -17,6 +18,7 @@ public class Items {
 	public static Item brownDrink;
 	public static Item greenDrink;
 	public static Item waterBottle;
+	public static Item strangeDrink;
 	
 	public static CreativeTabs modscraftTab=new CreativeTabs("modscraftTab"){
 		public Item getTabIconItem(){
@@ -26,14 +28,6 @@ public class Items {
 	
 	public static void init()
 	{
-		/*
-		 * Language Files:
-		 * Name Blocks:
-		 * tile.blockRed.name=Red Block
-		 * where blockRed is the unlocalized name
-		 * item.unlocalized_testItem_name.name=ModsCraft Test Item
-		 * where unlocalized_testItem_name is also the unlocalized name!
-		 */
 		testItem=new Item().setUnlocalizedName(ItemInfo.testItemUnlocalizedName).setCreativeTab(modscraftTab).setTextureName(eu.modscraft.mods.ModsCraft_ModInformation.ID+ ":" + ItemInfo.testItemTexture);
 		itemWindmill=new ItemWindmill().setUnlocalizedName(ItemInfo.windmillUnlocalizedName).setCreativeTab(modscraftTab).setTextureName("diamond");
 		itemMana=new ItemUseMana().setUnlocalizedName("item_mana").setCreativeTab(modscraftTab).setTextureName("coal");
@@ -41,13 +35,15 @@ public class Items {
 		brownDrink=new FoodItemsWithThirstRegeneration(4,1.0F,false,"brown_drink").setUnlocalizedName("brown_drink");
 		greenDrink=new FoodItemsWithThirstRegeneration(6,2.0F,false,"green_drink").setUnlocalizedName("green_drink");
 		waterBottle=new FoodItemsWithThirstRegeneration(2,0.5F,false,"water_bottle").setUnlocalizedName("water_bottle");
-		
+		strangeDrink=new FoodItemsWithThirstRegeneration(5,2.0F,false,"strange_drink").setUnlocalizedName("strange_drink");
 		//This is to set the regeneration amount of thirst.
 		((FoodItemsWithThirstRegeneration) coffee).setThirstReplenishAmount(5);
 		((FoodItemsWithThirstRegeneration) brownDrink).setThirstReplenishAmount(4);
 		((FoodItemsWithThirstRegeneration) greenDrink).setThirstReplenishAmount(8);
 		((FoodItemsWithThirstRegeneration) waterBottle).setThirstReplenishAmount(2);
+		((FoodItemsWithThirstRegeneration) strangeDrink).setThirstReplenishAmount(10);
 		
+		GameRegistry.registerItem(strangeDrink, "strange_drink");
 		GameRegistry.registerItem(brownDrink, "brown_drink");
 		GameRegistry.registerItem(greenDrink, "green_drink");
 		GameRegistry.registerItem(waterBottle, "water_bottle");
@@ -63,6 +59,30 @@ public class Items {
 	}
 	public static void registerRecipes()
 	{
+		//GameRegistry.addRecipe(new ItemStack(mysimpletool, 1), new Object[]{ "XXX", " # ", " # ", ('X'), Items.apple, ('#'), Items.coal});
+		GameRegistry.addRecipe(new ItemStack(waterBottle,2),new Object[]{
+			"XX ",
+			"   ",
+			"   ", ('X'), net.minecraft.item.Item.getItemById(326)
+		});
+		GameRegistry.addRecipe(new ItemStack(brownDrink,2),new Object[]{
+			"X  ",
+			"X  ",
+			"   ", ('X'), net.minecraft.item.Item.getItemById(326)
+		});
+		GameRegistry.addRecipe(new ItemStack(greenDrink,2),new Object[]{
+			"X  ",
+			" X ",
+			"   ", ('X'), net.minecraft.item.Item.getItemById(326)
+		});
+		GameRegistry.addRecipe(new ItemStack(coffee,2),new Object[]{
+			"X  ",
+			" X ",
+			"  X", ('X'), net.minecraft.item.Item.getItemById(326)
+		});
+		GameRegistry.addShapelessRecipe(new ItemStack(strangeDrink,2),
+				new ItemStack(waterBottle),new ItemStack(brownDrink),new ItemStack(greenDrink),
+				new ItemStack(coffee));
 		
 	}
 }

@@ -30,6 +30,7 @@ public class FluidHandler {
 		FluidContainerRegistry.registerFluidContainer(FluidRegistry.getFluidStack("salt_water",FluidContainerRegistry.BUCKET_VOLUME),new ItemStack(saltWaterBucket),new ItemStack(Items.bucket));
 		eu.modscraft.mods.events.ModsCraftBucketFilledEvent.INSTANCE.buckets.put(saltWaterBlock, saltWaterBucket);
 		//saltWaterBlock.registerIcons();
+		GameRegistry.addSmelting(saltWaterBucket, new ItemStack(net.minecraft.item.Item.getItemById(326)), 0.4f);
 	}
 	public static void init()
 	{

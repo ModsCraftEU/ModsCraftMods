@@ -7,6 +7,7 @@ item.item_coffee.name=Hot Coffee
 item.item_coffee.desc=TestDesc
 item.water_bottle.name=Water Bottle
 item.saltWaterBucket.name=Salt water bucket
+item.strange_drink.name=Strange Smelling Drink
 tile.blockWindmill.name=Windmill
 tile.blockWindmill_ground.name=Windmill Floor
 tile.blockWindmill_ground.desc=Every Windmill needs a stable ground. Why not zoidberg?

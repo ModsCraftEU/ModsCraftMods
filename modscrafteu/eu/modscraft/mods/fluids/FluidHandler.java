@@ -17,6 +17,8 @@ public class FluidHandler {
 		FluidRegistry.registerFluid(saltWater);
 		saltWaterBlock=new SaltWaterBlock(saltWater,Material.water).setBlockName("salt_water");
 		GameRegistry.registerBlock(saltWaterBlock, eu.modscraft.mods.ModsCraft_ModInformation.ID+"_"+saltWaterBlock.getUnlocalizedName());
+		
+		//saltWaterBlock.registerIcons();
 	}
 	public static void init()
 	{

@@ -12,7 +12,7 @@ public class Blocks {
 	public static void preInit(){
 		
 		blockWindmill=new BlockWindmill(Material.rock).setBlockName(BlockInformation_ModsCraft.windmillAddName).setCreativeTab(CreativeTabs.tabBlock);
-		blockWindmillGround=new BlockWindmillGround(Material.ground).setBlockName(BlockInformation_ModsCraft.windmillGroundAddName).setCreativeTab(CreativeTabs.tabBlock).setBlockTextureName(eu.modscraft.mods.ModsCraft_ModInformation.ID+":"+"blockWindmillGround");
+		blockWindmillGround=new BlockWindmillGround(Material.ground).setBlockName(BlockInformation_ModsCraft.windmillGroundAddName).setCreativeTab(CreativeTabs.tabBlock).setBlockTextureName(eu.modscraft.mods.ModsCraft_ModInformation.ID+":"+"saltWater_still");
 		
 		GameRegistry.registerBlock(blockWindmill, BlockInformation_ModsCraft.windmillAddName);
 		GameRegistry.registerBlock(blockWindmillGround, BlockInformation_ModsCraft.windmillGroundAddName);

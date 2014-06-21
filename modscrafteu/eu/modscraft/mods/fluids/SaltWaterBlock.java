@@ -30,7 +30,7 @@ public class SaltWaterBlock extends BlockFluidClassic{
 	}
 	
 	@SideOnly(Side.CLIENT)
-	public void registerIcons(IIconRegister register)
+	public void registerBlockIcons(IIconRegister register)
 	{
 		stillIcon=register.registerIcon(eu.modscraft.mods.ModsCraft_ModInformation.ID+ ":" + "saltWater_still");
 		flowingIcon=register.registerIcon(eu.modscraft.mods.ModsCraft_ModInformation.ID+ ":" + "saltWater_flowing");

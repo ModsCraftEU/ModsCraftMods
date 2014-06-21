@@ -2,6 +2,7 @@ package eu.modscraft.mods.fluids;
 
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.init.Blocks;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -48,7 +49,14 @@ public class SaltWaterBlock extends BlockFluidClassic{
 	@Override
 	public boolean displaceIfPossible(World world, int x, int y, int z) 
 	{
-        if (world.getBlock(x,  y,  z).getMaterial().isLiquid()) return true;
+		if (world.getBlock(x,  y,  z).getMaterial().isLiquid())
+		{
+			if(world.getBlock(x, y, z).equals(Blocks.water))
+			{
+				world.setBlock(x, y, z, eu.modscraft.mods.fluids.FluidHandler.saltWaterBlock);
+			}
+		}
+        if (world.getBlock(x,  y,  z).getMaterial().isLiquid()) return false;
         return super.displaceIfPossible(world, x, y, z);
 	}
 }

@@ -35,10 +35,11 @@ public class WorldGeneratorModsCraft implements IWorldGenerator{
 			default:break;
 		}
 	}
+	//TODO: Efficiency. A lot of it!
 	public void generateOverworld(Random random, int chunkX, int chunkZ, World world)
 	{
 		//System.out.println("DEBUG! SALTWATER FOUND");
-		for(int i=50;i<70;i++)
+		for(int i=50;i<75;i++)
 		{
 			mGenerate(world,random,chunkX*16,i,chunkZ*16);
 		}
@@ -48,9 +49,19 @@ public class WorldGeneratorModsCraft implements IWorldGenerator{
     {
 		if(world.getBlock(x, y, z)==Blocks.water)
 		{
-			world.setBlock(x, y, z, eu.modscraft.mods.fluids.FluidHandler.saltWaterBlock, 0, 2);
+			for(int i=0;i<=16;i++)
+			{
+				for(int j=0;j<=16;j++)
+				{
+					if(world.getBlock(x+i,y,z+j)==Blocks.water)
+					{
+						world.setBlock(x+i, y, z+j, eu.modscraft.mods.fluids.FluidHandler.saltWaterBlock, 0, 2);
+					}
+				}
+			}
+			
 			return true;
-		}
+		}	
         if (world.getBlock(x, y + 1, z) != Blocks.stone&&world.getBlock(x, y + 1, z) != Blocks.dirt&&world.getBlock(x, y + 1, z) != Blocks.sand&&world.getBlock(x, y + 1, z) != Blocks.gravel)
         {
             return false;
